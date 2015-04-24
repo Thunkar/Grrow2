@@ -1,23 +1,23 @@
-package com.salt.grrow.viewmodel;
+package com.salt.grrow.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.utils.Array;
-import com.salt.grrow.CheckPointView;
-import com.salt.grrow.CreatureView;
 //penecito rico
 import com.salt.grrow.model.*;
+import com.salt.grrow.view.CheckPointView;
+import com.salt.grrow.view.CreatureView;
 
-public class MainViewModel {
+public class MainController {
 	
-    public static MainViewModel Current;
+    public static MainController Current;
     public Tank Tank;
 	public static Texture creatureTexture;
 	public static Texture foodTexture;
 
 
 
-    public MainViewModel()
+    public MainController()
     {
         Current = this;
         Tank = new Tank(1366, 768, 7);
@@ -31,19 +31,19 @@ public class MainViewModel {
     	for(Creature c : creatures){
     		CreatureView cv = new CreatureView(c.getId(), c.getX(), c.getY(), 
 	        		c.getOrientation(), c.collisionRadius, c.Brain.dna, creatureTexture);
-    		MainViewModel.Current.Tank.Creatures.add(cv);
+    		MainController.Current.Tank.Creatures.add(cv);
     	}
     	for(CheckPoint c : checkpoints){
     		CheckPointView cv = new CheckPointView(c.getX(), 
 					 c.getY(), 10, foodTexture);
-    		MainViewModel.Current.Tank.CheckPoints.add(cv);
+    		MainController.Current.Tank.CheckPoints.add(cv);
     	}
     }
     	
     public static void setCheckPoint(CheckPoint c){
     	CheckPointView cv = new CheckPointView(c.getX(), 
 				 c.getY(), c.collisionRadius, foodTexture);
-		MainViewModel.Current.Tank.CheckPoints.add(cv);
+		MainController.Current.Tank.CheckPoints.add(cv);
 	}
 
 

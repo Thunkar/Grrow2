@@ -1,6 +1,4 @@
-package com.salt.grrow;
-
-
+package com.salt.grrow.view;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -8,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.salt.grrow.viewmodel.MainViewModel;
+import com.salt.grrow.controller.MainController;
 
 public class GrrowMain extends Game {
 	
@@ -29,7 +27,7 @@ public class GrrowMain extends Game {
 		uiskin = new Skin(file);
 		this.setScreen(new MainMenuScreen(this));
 		@SuppressWarnings("unused")
-		MainViewModel MainViewModel = new MainViewModel();
+		MainController mainController = new MainController();
 	}
 
 	public void render() {

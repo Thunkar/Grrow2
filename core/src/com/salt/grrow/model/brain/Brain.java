@@ -3,7 +3,7 @@ package com.salt.grrow.model.brain;
 import com.badlogic.gdx.utils.Array;
 import com.salt.grrow.model.DNA;
 
-public class _1LayerBrain {
+public class Brain {
 
     public Input central;
     public Input left1;
@@ -43,7 +43,7 @@ public class _1LayerBrain {
     public Array<Neuron> fourthLayer;
     public Array<Neuron> outputs;
 
-    public _1LayerBrain(DNA dna)
+    public Brain(DNA dna)
     {
         this.dna = dna;
         neurons = new Array<Neuron>();

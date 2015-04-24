@@ -1,4 +1,4 @@
-package com.salt.grrow;
+package com.salt.grrow.view;
 
 
 import java.io.FileNotFoundException;
@@ -14,11 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.salt.grrow.controller.MainController;
 import com.salt.grrow.model.CheckPoint;
 import com.salt.grrow.model.Creature;
 import com.salt.grrow.model.DNA;
 import com.salt.grrow.model.OfflineTank;
-import com.salt.grrow.viewmodel.MainViewModel;
 
 	public class MainMenuScreen implements Screen {
 
@@ -72,8 +72,6 @@ import com.salt.grrow.viewmodel.MainViewModel;
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					game.stage.clear();
-					
-			        
 			        Array<Creature> generation0 = new Array<Creature>();
 			        Array<CheckPoint> random = new Array<CheckPoint>();
 			        for(int i = 0; i<15; i++){
@@ -86,7 +84,7 @@ import com.salt.grrow.viewmodel.MainViewModel;
 				        Creature Creature1 = new Creature("Carol", 0, -300, 90, 10, dna1);
 				        generation0.add(Creature1);
 			        }
-			        MainViewModel.setTank(generation0, random);
+			        MainController.setTank(generation0, random);
 					game.setScreen(new GameScreen(game));
 				}
 			});
@@ -101,7 +99,7 @@ import com.salt.grrow.viewmodel.MainViewModel;
 			        	random.add(checkpoint1);
 			        }
 			        try {
-						MainViewModel.setTank(OfflineTank.creaturesFromFiles(), random);
+						MainController.setTank(OfflineTank.creaturesFromFiles(), random);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}

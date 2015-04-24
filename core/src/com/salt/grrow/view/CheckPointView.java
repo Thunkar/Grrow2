@@ -1,4 +1,4 @@
-package com.salt.grrow;
+package com.salt.grrow.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;

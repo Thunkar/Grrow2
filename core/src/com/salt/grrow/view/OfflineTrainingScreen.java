@@ -1,4 +1,4 @@
-package com.salt.grrow;
+package com.salt.grrow.view;
 
 
 
@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -22,10 +23,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.salt.grrow.controller.MainController;
 import com.salt.grrow.model.Creature;
 import com.salt.grrow.model.DNA;
 import com.salt.grrow.model.OfflineTank;
-import com.salt.grrow.viewmodel.MainViewModel;
 
 
 
@@ -95,8 +96,6 @@ public class OfflineTrainingScreen implements Screen {
 		continueSim = new TextButton("Continue!", game.uiskin);
 		table.add(start).width(300).padTop(10).padBottom(3);
 		table.row();
-		//		table.add(stahp).width(300).padTop(10).padBottom(3);
-		//		table.row();
 		table.add(continueSim).width(300).padTop(10).padBottom(3);
 		table.row();
 		table.add(exit).width(300).padTop(10).padBottom(3);
@@ -159,7 +158,7 @@ public class OfflineTrainingScreen implements Screen {
 					Creature c = new Creature("SmartAss", 0, -330, 90, 10, dna);
 					newCreatures.add(c);
 				}
-				MainViewModel.setTank(newCreatures, tank.CheckPoints);
+				MainController.setTank(newCreatures, tank.CheckPoints);
 				game.setScreen(new GameScreen(game));
 			}
 		});
@@ -189,9 +188,6 @@ public class OfflineTrainingScreen implements Screen {
 			files.add(file);
 			counter++;
 		}
-	}
-	public void addPuntuations(){
-		
 	}
 
 	Runnable simrun = new Runnable(){
