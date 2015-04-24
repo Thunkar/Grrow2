@@ -1,8 +1,8 @@
-package com.salt.grrow.view;
+package com.thunkar.grrow.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.salt.grrow.model.CheckPoint;
+import com.thunkar.grrow.model.CheckPoint;
 
 public class CheckPointView extends CheckPoint{
 

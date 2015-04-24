@@ -1,4 +1,4 @@
-package com.salt.grrow.model.brain;
+package com.thunkar.grrow.model.brain;
 
 
 import com.badlogic.gdx.utils.Array;

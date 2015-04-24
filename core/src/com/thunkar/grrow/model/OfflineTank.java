@@ -1,4 +1,4 @@
-package com.salt.grrow.model;
+package com.thunkar.grrow.model;
 
 import java.io.*;
 import java.util.Iterator;
@@ -47,13 +47,11 @@ public class OfflineTank extends Tank
 		{
 			Creature dummy = itr.next();
 			this.lastGeneration.add(dummy);
-			// printwr.println(dummy.getHealth());
 		}
 		this.Creatures.removeAll(this.lastGeneration, true);
 		Creature UglyOneThatFucks = null;
 		if (DNA.getRandom().nextDouble() < 0.05)
 		{
-			// System.out.println("The Ugly One Fucked!");
 			UglyOneThatFucks = this.Creatures.random();
 		}
 		else
@@ -62,8 +60,6 @@ public class OfflineTank extends Tank
 		{
 			this.lastGeneration.add(UglyOneThatFucks);
 		}
-		// printwr.println("Generation: " + this.getGeneration());
-		// printwr.flush();
 		this.Creatures.clear();
 		this.Creatures.addAll(reproduce(this.lastGeneration));
 		this.Creatures.addAll(this.lastGeneration);
@@ -115,6 +111,10 @@ public class OfflineTank extends Tank
 	public void newGeneration() throws IOException
 	{
 		this.lastGeneration.clear();
+		for (Creature c : this.Creatures)
+		{
+			c.resetHealth();
+		}
 		generateCheckPoints();
 		for (int i = 0; i < iterationNumber; i++)
 		{
@@ -223,7 +223,6 @@ public class OfflineTank extends Tank
 			if (c.Brain.lrdist.getValue() < previousDistanceToFood)
 			{
 				c.health += 10;
-				return;
 			}
 			else
 			{
@@ -232,7 +231,9 @@ public class OfflineTank extends Tank
 					c.health -= 10;
 				}
 				if (c.getCreaturePosition().equals(previousPosition))
+				{
 					c.health -= 20;
+				}
 			}
 		}
 	}

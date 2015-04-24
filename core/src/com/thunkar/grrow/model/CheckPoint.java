@@ -1,4 +1,4 @@
-package com.salt.grrow.model;
+package com.thunkar.grrow.model;
 
 import com.badlogic.gdx.math.Vector2;
 

@@ -1,12 +1,13 @@
-package com.salt.grrow.model;
+package com.thunkar.grrow.model;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.salt.grrow.model.brain.Brain;
+import com.thunkar.grrow.model.brain.Brain;
 
 public class Creature implements Comparable<Creature>
 {
@@ -21,6 +22,9 @@ public class Creature implements Comparable<Creature>
 	public Array<Vector2> RayEnds;
 	private boolean canEat;
 	public CheckPoint closerCheckPoint;
+	
+	private final int EATING_THRESHOLD = 24;
+	private final int INITIAL_HEALTH = 100;
 
 	public boolean canEat()
 	{
@@ -35,13 +39,18 @@ public class Creature implements Comparable<Creature>
 	public Creature(String id, float x, float y, float orientation, int collisionRadius, DNA dna)
 	{
 		this.id = id;
-		this.health = 100;
+		this.health = INITIAL_HEALTH;
 		this.orientation = orientation;
 		this.x = x;
 		this.y = y;
 		this.Brain = new Brain(dna);
 		this.collisionRadius = collisionRadius;
 		this.RayEnds = new Array<Vector2>();
+	}
+	
+	public void resetHealth()
+	{
+		this.health = INITIAL_HEALTH;
 	}
 
 	public boolean SameSide(Vector2 p1, Vector2 p2, Vector2 a, Vector2 b)
@@ -55,18 +64,12 @@ public class Creature implements Comparable<Creature>
 		float CP1 = BA.crs(P1A);
 		Vector2 P2A = inP2.sub(inA);
 		float CP2 = BA.crs(P2A);
-		if ((CP1 * CP2) >= 0)
-			return true;
-		else
-			return false;
+		return CP1 * CP2 >= 0;
 	}
 
 	public boolean PointInTriangle(Vector2 p, Vector2 a, Vector2 b, Vector2 c)
 	{
-		if (SameSide(p, a, b, c) && SameSide(p, b, a, c) && SameSide(p, c, a, b))
-			return true;
-		else
-			return false;
+		return SameSide(p, a, b, c) && SameSide(p, b, a, c) && SameSide(p, c, a, b);
 	}
 
 	public void Sense(Tank tank)
@@ -112,7 +115,7 @@ public class Creature implements Comparable<Creature>
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
 				this.Brain.central.setValue(1);
-				if (distance < 32)
+				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
 					closer = c;
@@ -133,7 +136,7 @@ public class Creature implements Comparable<Creature>
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
 				this.Brain.left2.setValue(1);
-				if (distance < 32)
+				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
 					closer = c;
@@ -143,7 +146,7 @@ public class Creature implements Comparable<Creature>
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
 				this.Brain.left2.setValue(1);
-				if (distance < 32)
+				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
 					closer = c;
@@ -154,7 +157,7 @@ public class Creature implements Comparable<Creature>
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
 				this.Brain.left2.setValue(1);
-				if (distance < 32)
+				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
 					closer = c;

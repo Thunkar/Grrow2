@@ -1,4 +1,4 @@
-package com.salt.grrow.view;
+package com.thunkar.grrow.view;
 
 
 import java.io.FileNotFoundException;
@@ -14,11 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.salt.grrow.controller.MainController;
-import com.salt.grrow.model.CheckPoint;
-import com.salt.grrow.model.Creature;
-import com.salt.grrow.model.DNA;
-import com.salt.grrow.model.OfflineTank;
+import com.thunkar.grrow.controller.MainController;
+import com.thunkar.grrow.model.CheckPoint;
+import com.thunkar.grrow.model.Creature;
+import com.thunkar.grrow.model.DNA;
+import com.thunkar.grrow.model.OfflineTank;
 
 	public class MainMenuScreen implements Screen {
 
@@ -129,7 +129,7 @@ import com.salt.grrow.model.OfflineTank;
 
 		@Override
 		public void resize(int width, int height) {
-			game.stage.getViewport().update(1366, 768, true);
+			game.stage.getViewport().update(game.width, game.height, true);
 		}
 
 		@Override

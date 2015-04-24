@@ -1,4 +1,4 @@
-package com.salt.grrow.view;
+package com.thunkar.grrow.view;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.salt.grrow.controller.MainController;
+import com.thunkar.grrow.controller.MainController;
 
 public class GrrowMain extends Game {
 	

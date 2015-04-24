@@ -1,4 +1,4 @@
-package com.salt.grrow.model.brain;
+package com.thunkar.grrow.model.brain;
 
 
 public interface Neuron {

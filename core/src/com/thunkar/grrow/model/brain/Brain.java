@@ -1,7 +1,7 @@
-package com.salt.grrow.model.brain;
+package com.thunkar.grrow.model.brain;
 
 import com.badlogic.gdx.utils.Array;
-import com.salt.grrow.model.DNA;
+import com.thunkar.grrow.model.DNA;
 
 public class Brain {
 

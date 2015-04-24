@@ -1,12 +1,12 @@
-package com.salt.grrow.controller;
+package com.thunkar.grrow.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.utils.Array;
 //penecito rico
-import com.salt.grrow.model.*;
-import com.salt.grrow.view.CheckPointView;
-import com.salt.grrow.view.CreatureView;
+import com.thunkar.grrow.model.*;
+import com.thunkar.grrow.view.CheckPointView;
+import com.thunkar.grrow.view.CreatureView;
 
 public class MainController {
 	

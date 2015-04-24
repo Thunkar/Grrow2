@@ -2,7 +2,7 @@ package com.thunkar.grrow2.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.salt.grrow.view.GrrowMain;
+import com.thunkar.grrow.view.GrrowMain;
 
 
 public class DesktopLauncher {

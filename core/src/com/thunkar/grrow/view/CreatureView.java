@@ -1,9 +1,9 @@
-package com.salt.grrow.view;
+package com.thunkar.grrow.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.salt.grrow.model.Creature;
-import com.salt.grrow.model.DNA;
+import com.thunkar.grrow.model.Creature;
+import com.thunkar.grrow.model.DNA;
 
 public class CreatureView extends Creature{
 	
