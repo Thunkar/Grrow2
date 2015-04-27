@@ -5,6 +5,12 @@
 *.ear
 hs_err_pid*
 
+## Gradle
+
+.gradle
+gradle-app.setting
+build/
+
 ## OS Specific
 .DS_Store
 desktop/DNA/
