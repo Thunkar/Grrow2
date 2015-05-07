@@ -46,6 +46,8 @@ public class OfflineTrainingScreen implements Screen
 	boolean hasStarted;
 	private int max;
 	private int min;
+	private double axisHeight;
+	private double nextNormalized;
 	public static Array<Integer> secondPoints;
 	public static Array<Integer> thirdPoints;
 	public static Array<Integer> fourthPoints;
@@ -391,7 +393,7 @@ public class OfflineTrainingScreen implements Screen
 		BW.close();
 	}
 
-	public int[] convertToPlot(int x, Array<Integer> y, int yaxis, int yoffset)
+	public int[] convertToPlot(int x, Array<Integer> y, int yaxis, int yoffset, boolean setMaxMin)
 	{
 		while (x >= 500)
 			x -= 500;
@@ -412,18 +414,21 @@ public class OfflineTrainingScreen implements Screen
 					System.out.println("WTF?!");
 				}
 			}
-			if (next > max)
+			if (setMaxMin)
 			{
-				max = next;
+				if (next > max)
+				{
+					max = next;
+				}
+				if (next < min)
+				{
+					min = next;
+				}
+				maxlabel.setText("" + max);
+				minlabel.setText("" + min);
+				axisHeight = max - min;
+				nextNormalized = next - min;
 			}
-			if (next < min)
-			{
-				min = next;
-			}
-			maxlabel.setText("" + max);
-			minlabel.setText("" + min);
-			double axisHeight = max - min;
-			double nextNormalized = next - min;
 			result[i] = yoffset + (int) ((double) yaxis * (nextNormalized / axisHeight));
 		}
 		return result;
@@ -437,7 +442,7 @@ public class OfflineTrainingScreen implements Screen
 		camera.update();
 		game.stage.getViewport().update(game.width, game.height, true);
 		game.srenderer.begin(ShapeType.Line);
-		int[] result = convertToPlot(generation, firstPoints, 500, 200);
+		int[] result = convertToPlot(generation, firstPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -445,7 +450,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, secondPoints, 500, 200);
+		result = convertToPlot(generation, secondPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -453,7 +458,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, thirdPoints, 500, 200);
+		result = convertToPlot(generation, thirdPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -461,7 +466,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, fourthPoints, 500, 200);
+		result = convertToPlot(generation, fourthPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -469,7 +474,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, fifthPoints, 500, 200);
+		result = convertToPlot(generation, fifthPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -477,7 +482,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, sixthPoints, 500, 200);
+		result = convertToPlot(generation, sixthPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -485,7 +490,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, seventhPoints, 500, 200);
+		result = convertToPlot(generation, seventhPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -493,7 +498,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, eighthPoints, 500, 200);
+		result = convertToPlot(generation, eighthPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -501,7 +506,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, ninthPoints, 500, 200);
+		result = convertToPlot(generation, ninthPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -509,7 +514,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, tenthPoints, 500, 200);
+		result = convertToPlot(generation, tenthPoints, 500, 200, false);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;
@@ -517,7 +522,7 @@ public class OfflineTrainingScreen implements Screen
 			game.srenderer.line((float) 2.4 * counter + 50, (float) result[i], (float) 2.4
 					* (counter + 1) + 50, (float) result[i + 1]);
 		}
-		result = convertToPlot(generation, medianPoints, 500, 200);
+		result = convertToPlot(generation, medianPoints, 500, 200, true);
 		for (int i = 0; i < result.length - 2; i++)
 		{
 			int counter = i;

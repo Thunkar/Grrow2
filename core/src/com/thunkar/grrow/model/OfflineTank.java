@@ -1,6 +1,10 @@
 package com.thunkar.grrow.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 
 import com.badlogic.gdx.math.Vector2;
@@ -53,6 +57,7 @@ public class OfflineTank extends Tank
 		if (DNA.getRandom().nextDouble() < 0.05)
 		{
 			UglyOneThatFucks = this.Creatures.random();
+			System.out.println("The ugly one fucked!");
 		}
 		else
 			UglyOneThatFucks = itr.next();
@@ -166,8 +171,6 @@ public class OfflineTank extends Tank
 			boolean hasCrashed = false;
 			float tempY = c.getY();
 			float tempRot = c.getOrientation();
-			float previousRot = tempRot;
-			float previousDist = c.Brain.lrdist.getValue();
 			Vector2 previousPos = c.getCreaturePosition();
 			c.Sense(this);
 			c.Brain.Propagate();
@@ -203,38 +206,25 @@ public class OfflineTank extends Tank
 			c.setX(tempX);
 			c.setY(tempY);
 			c.setOrientation(tempRot);
-			fitnessFunction(c, hasEaten, hasCrashed, previousDist, previousRot, previousPos);
+			fitnessFunction(c, hasEaten, hasCrashed, previousPos);
 		}
 	}
 
-	private void fitnessFunction(Creature c, boolean hasEaten, boolean hasCrashed, float previousDistanceToFood,  float previousRotation, Vector2 previousPosition)
+	private void fitnessFunction(Creature c, boolean hasEaten, boolean hasCrashed,
+			Vector2 previousPosition)
 	{
+		c.health -= 1;
 		if (hasCrashed)
 		{
-			c.health -= 10;
+			c.health -= 30;
 		}
 		if (hasEaten)
 		{
-			c.health += 300;
+			c.health += 50;
 		}
-		else
+		if (c.getCreaturePosition().equals(previousPosition))
 		{
-			c.health -= 1;
-			if (c.Brain.lrdist.getValue() < previousDistanceToFood)
-			{
-				c.health += 10;
-			}
-			else
-			{
-				if (c.canEat())
-				{
-					c.health -= 10;
-				}
-				if (c.getCreaturePosition().equals(previousPosition))
-				{
-					c.health -= 20;
-				}
-			}
+			c.health -= 1000;
 		}
 	}
 

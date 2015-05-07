@@ -11,6 +11,9 @@ public class Brain {
     public Input right1;
     public Input right2;
     public Input lrdist;
+    public Input wallsX;
+    public Input wallsY;
+    public Input partner;
     public Hidden l1;
     public Hidden l2;
     public Hidden l3;
@@ -59,6 +62,9 @@ public class Brain {
         left1 = new Input();
         right2 = new Input();
         lrdist = new Input();
+        wallsX = new Input();
+        wallsY = new Input();
+        partner = new Input();
         l1 = new Hidden();
         l2 = new Hidden();
         l3 = new Hidden();
@@ -88,6 +94,9 @@ public class Brain {
         inputs.add(right2);
         inputs.add(left1);
         inputs.add(lrdist);
+        inputs.add(wallsX);
+        inputs.add(wallsY);
+        inputs.add(partner);
         firstLayer.add(l1);
         firstLayer.add(l2);
         firstLayer.add(l3);

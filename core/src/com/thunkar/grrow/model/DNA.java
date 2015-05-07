@@ -13,7 +13,7 @@ public class DNA {
 
      
      public DNA(){
-    	 this.size = 112;
+    	 this.size = 130;
          this.chain = new float[size];
          for(int i = 0; i<this.size; i++){
         	 this.chain[i] = DNA.nextFloatWithNegatives(10);
@@ -55,9 +55,9 @@ public class DNA {
 		for(int i = cutpoint; i<size; i++){
 			result.chain[i] = dna.chain[i];
 		}
-		if(DNA.getRandom().nextDouble()<0.0005){
+		if(DNA.getRandom().nextDouble()<0.001){
 			result.chain[cutpoint] = DNA.nextFloatWithNegatives(10);
-			//System.out.println("Mutation!");
+			System.out.println("Mutation!");
 		}
 		return result;
 	}

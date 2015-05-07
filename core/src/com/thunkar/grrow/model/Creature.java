@@ -23,7 +23,7 @@ public class Creature implements Comparable<Creature>
 	private boolean canEat;
 	public CheckPoint closerCheckPoint;
 	
-	private final int EATING_THRESHOLD = 24;
+	private final int EATING_THRESHOLD = 36;
 	private final int INITIAL_HEALTH = 100;
 
 	public boolean canEat()
@@ -83,12 +83,19 @@ public class Creature implements Comparable<Creature>
 		this.Brain.left1.setValue(0);
 		this.Brain.right2.setValue(0);
 		this.Brain.lrdist.setValue(0);
-		Vector2 vis1 = this.getCreaturePosition().nor().add(500, 25).rotate(this.orientation);
-		Vector2 vis2 = this.getCreaturePosition().nor().add(500, -25).rotate(this.orientation);
-		Vector2 vis3 = this.getCreaturePosition().nor().add(200, -50).rotate(this.orientation);
-		Vector2 vis4 = this.getCreaturePosition().nor().add(150, -170).rotate(this.orientation);
-		Vector2 vis5 = this.getCreaturePosition().nor().add(200, 50).rotate(this.orientation);
-		Vector2 vis6 = this.getCreaturePosition().nor().add(150, 170).rotate(this.orientation);
+		this.Brain.wallsX.setValue(0);
+		this.Brain.wallsY.setValue(0);
+		this.Brain.partner.setValue(0);
+		
+		Vector2 vis1 = this.getCreaturePosition().nor().add(300, 190).rotate(this.orientation);
+		Vector2 vis2 = this.getCreaturePosition().nor().add(370, 100).rotate(this.orientation);
+		Vector2 vis3 = this.getCreaturePosition().nor().add(400, 30).rotate(this.orientation);
+		Vector2 vis4 = this.getCreaturePosition().nor().add(400, -30).rotate(this.orientation);
+		Vector2 vis5 = this.getCreaturePosition().nor().add(370, -100).rotate(this.orientation);
+		Vector2 vis6 = this.getCreaturePosition().nor().add(300, -190).rotate(this.orientation);
+
+
+		
 		Vector2 A = this.getCreaturePosition().add(vis1);
 		Vector2 B = this.getCreaturePosition().add(vis2);
 		Vector2 D = this.getCreaturePosition().add(vis3);
@@ -101,7 +108,10 @@ public class Creature implements Comparable<Creature>
 //		this.RayEnds.add(E);
 //		this.RayEnds.add(F);
 //		this.RayEnds.add(G);
-		float minimumDistance = 0;
+		float minimumDistance = 1000000;
+		float nose = 0;
+ 
+		
 		for (CheckPoint c : tank.CheckPoints)
 		{
 			float distance = this.getCreaturePosition().dst(c.getCheckPointPosition());
@@ -110,11 +120,12 @@ public class Creature implements Comparable<Creature>
 				minimumDistance = distance;
 				closer = c;
 			}
-			this.Brain.lrdist.setValue(minimumDistance);
-			if (PointInTriangle(c.getCheckPointPosition(), A, B, this.getCreaturePosition()))
+			
+			float normDistance = distance*0.01f;
+			if (PointInTriangle(c.getCheckPointPosition(), D, E, this.getCreaturePosition()))
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
-				this.Brain.central.setValue(1);
+				this.Brain.central.setValue(normDistance);
 				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
@@ -124,28 +135,28 @@ public class Creature implements Comparable<Creature>
 			if (PointInTriangle(c.getCheckPointPosition(), B, D, this.getCreaturePosition()))
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
-				this.Brain.right1.setValue(1);
-				if (distance < 32)
-				{
-					this.canEat = true;
-					closer = c;
-				}
-			}
-
-			if (PointInTriangle(c.getCheckPointPosition(), D, E, this.getCreaturePosition()))
-			{
-				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
-				this.Brain.left2.setValue(1);
+				this.Brain.left1.setValue(normDistance);
 				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
 					closer = c;
 				}
 			}
-			if (PointInTriangle(c.getCheckPointPosition(), A, F, this.getCreaturePosition()))
+
+			if (PointInTriangle(c.getCheckPointPosition(), A, B, this.getCreaturePosition()))
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
-				this.Brain.left2.setValue(1);
+				this.Brain.left2.setValue(normDistance);
+				if (distance < EATING_THRESHOLD)
+				{
+					this.canEat = true;
+					closer = c;
+				}
+			}
+			if (PointInTriangle(c.getCheckPointPosition(), E, F, this.getCreaturePosition()))
+			{
+				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
+				this.Brain.right1.setValue(normDistance);
 				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
@@ -156,7 +167,7 @@ public class Creature implements Comparable<Creature>
 			if (PointInTriangle(c.getCheckPointPosition(), F, G, this.getCreaturePosition()))
 			{
 				//this.RayEnds.add(new Vector2(c.getX(), c.getY()));
-				this.Brain.left2.setValue(1);
+				this.Brain.right2.setValue(normDistance);
 				if (distance < EATING_THRESHOLD)
 				{
 					this.canEat = true;
@@ -165,6 +176,24 @@ public class Creature implements Comparable<Creature>
 			}
 
 		}
+		
+		for(int i = 0; i < tank.Creatures.size; i++)
+		{
+			Creature another = tank.Creatures.get(i);
+			if(!another.equals(this) && another.getCreaturePosition().dst(this.getCreaturePosition()) < EATING_THRESHOLD){
+				this.Brain.partner.setValue(1);
+			}
+		}
+		
+		minimumDistance = minimumDistance < 400 ? minimumDistance : 400;
+		nose = minimumDistance/400;
+		
+		float normalizedXToWalls = 2*Math.abs(this.x)/tank.getXsize();
+		float normalizedYToWalls = 2*Math.abs(this.y)/tank.getYsize();
+		
+		this.Brain.wallsX.setValue(normalizedXToWalls);
+		this.Brain.wallsX.setValue(normalizedYToWalls);
+		this.Brain.lrdist.setValue(nose);
 		this.closerCheckPoint = closer;
 	}
 

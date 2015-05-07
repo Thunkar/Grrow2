@@ -79,11 +79,11 @@ import com.thunkar.grrow.model.OfflineTank;
 								 DNA.nextIntWithNegatives(350), 10);
 			        	random.add(checkpoint1);
 			        }
-			        for(int i = 0; i<10; i++){
+			        //for(int i = 0; i<10; i++){
 			        	DNA dna1 = new DNA();
 				        Creature Creature1 = new Creature("Carol", 0, -300, 90, 10, dna1);
 				        generation0.add(Creature1);
-			        }
+			       // }
 			        MainController.setTank(generation0, random);
 					game.setScreen(new GameScreen(game));
 				}
