@@ -22,7 +22,7 @@ public class Output implements Neuron{
         {
             z += c.getInput().getValue()*c.getWeight();
         }
-        this.value = this.activation / (1 + (float)(Math.pow(((float)Math.E), -z)));
+        this.value = this.activation / (1 + (float)(Math.pow(((float)Math.E), -z+1)));
     }
     
 	public double getActivation() {

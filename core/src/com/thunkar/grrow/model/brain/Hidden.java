@@ -21,7 +21,7 @@ public class Hidden implements Neuron{
 		{
 			z += c.getInput().getValue()*c.getWeight();
 		}
-		this.value = 1 / (1 + (float)(Math.pow(((float)Math.E), -z)));
+		this.value = 1 / (1 + (float)(Math.pow(((float)Math.E), -z+1)));
 	}
 
 

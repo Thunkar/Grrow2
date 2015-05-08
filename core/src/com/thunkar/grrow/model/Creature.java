@@ -87,12 +87,12 @@ public class Creature implements Comparable<Creature>
 		this.Brain.wallsY.setValue(0);
 		this.Brain.partner.setValue(0);
 		
-		Vector2 vis1 = this.getCreaturePosition().nor().add(300, 190).rotate(this.orientation);
-		Vector2 vis2 = this.getCreaturePosition().nor().add(370, 100).rotate(this.orientation);
-		Vector2 vis3 = this.getCreaturePosition().nor().add(400, 30).rotate(this.orientation);
-		Vector2 vis4 = this.getCreaturePosition().nor().add(400, -30).rotate(this.orientation);
-		Vector2 vis5 = this.getCreaturePosition().nor().add(370, -100).rotate(this.orientation);
-		Vector2 vis6 = this.getCreaturePosition().nor().add(300, -190).rotate(this.orientation);
+		Vector2 vis1 = this.getCreaturePosition().nor().add(-50, 300).rotate(this.orientation);
+		Vector2 vis2 = this.getCreaturePosition().nor().add(200, 200).rotate(this.orientation);
+		Vector2 vis3 = this.getCreaturePosition().nor().add(400, 50).rotate(this.orientation);
+		Vector2 vis4 = this.getCreaturePosition().nor().add(400, -50).rotate(this.orientation);
+		Vector2 vis5 = this.getCreaturePosition().nor().add(200, -200).rotate(this.orientation);
+		Vector2 vis6 = this.getCreaturePosition().nor().add(-50, -300).rotate(this.orientation);
 
 
 		
@@ -192,9 +192,12 @@ public class Creature implements Comparable<Creature>
 		float normalizedYToWalls = 2*Math.abs(this.y)/tank.getYsize();
 		
 		this.Brain.wallsX.setValue(normalizedXToWalls);
-		this.Brain.wallsX.setValue(normalizedYToWalls);
+		this.Brain.wallsY.setValue(normalizedYToWalls);
 		this.Brain.lrdist.setValue(nose);
 		this.closerCheckPoint = closer;
+		
+		//System.out.println("L2: " + Brain.left2.getValue() + " L1: " + Brain.left1.getValue() + " C: " + Brain.central.getValue() + " R1: " + Brain.right1.getValue() + " R2: " + Brain.right2.getValue());
+		//System.out.println("Partner: " + Brain.partner.getValue() + " X: " + Brain.wallsX.getValue() + " Y: " + Brain.wallsY.getValue() + " Nose: " + Brain.lrdist.getValue());
 	}
 
 	public boolean Eat(double outputFromBrain, CheckPoint closer, Tank tank)

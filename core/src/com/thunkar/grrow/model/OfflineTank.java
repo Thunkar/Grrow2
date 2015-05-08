@@ -216,15 +216,11 @@ public class OfflineTank extends Tank
 		c.health -= 1;
 		if (hasCrashed)
 		{
-			c.health -= 30;
+			c.health -= 10;
 		}
 		if (hasEaten)
 		{
 			c.health += 50;
-		}
-		if (c.getCreaturePosition().equals(previousPosition))
-		{
-			c.health -= 1000;
 		}
 	}
 
