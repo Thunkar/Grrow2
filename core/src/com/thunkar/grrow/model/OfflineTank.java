@@ -216,11 +216,11 @@ public class OfflineTank extends Tank
 		c.health -= 1;
 		if (hasCrashed)
 		{
-			c.health -= 10;
+			c.health -= 1;
 		}
 		if (hasEaten)
 		{
-			c.health += 50;
+			c.health += 20;
 		}
 	}
 

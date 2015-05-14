@@ -55,7 +55,7 @@ public class DNA {
 		for(int i = cutpoint; i<size; i++){
 			result.chain[i] = dna.chain[i];
 		}
-		if(DNA.getRandom().nextDouble()<0.001){
+		if(DNA.getRandom().nextDouble()<0.003){
 			result.chain[cutpoint] = DNA.nextFloatWithNegatives(10);
 			System.out.println("Mutation!");
 		}
